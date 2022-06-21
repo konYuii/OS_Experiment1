@@ -412,18 +412,26 @@ void sched_init(void)
 }
 
 //exeperiment 1
-int sys_getdents()
+unsigned int sys_sleep(unsigned int time)
 {
-	printk("getdents work!\n");
+	printk("sleep work!%d\n",(int)time);
 	return 0;
 }
-int sys_sleep()
+int sys_getdents(int fd,struct linux_dirent * dirp,unsigned long len)
 {
-	printk("sleep work!\n");
+	printk("getdents work!%d\n",fd);
 	return 0;
 }
-int sys_getcwd()
+
+char* sys_getcwd(char * buf, size_t size)
 {
-	printk("getcwd work!\n");
+	char path[256];
+	printk("getcwd work%s!\n",buf);
+	return buf;
+}
+
+int sys_execve2(const char * file,char ** argv,char ** envp)
+{
+	printk("execve2 work!%s\n",file);
 	return 0;
 }
