@@ -141,7 +141,7 @@ void main(void)		/* This really IS void, no error here. */
 	buffer_init(buffer_memory_end);
 	hd_init();
 
-	//sleep(5);
+	sleep(5);
 	struct linux_dirent * dd;
 	getdents(1,dd,2);
 	getcwd("agdgda",8);

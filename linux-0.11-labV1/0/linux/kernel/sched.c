@@ -414,13 +414,10 @@ void sched_init(void)
 }
 
 //exeperiment 1
-void handler()
-{
-
-}
 int sys_sleep(unsigned int seconds)
 {
-	
+	printk("sleep work!%d\n",seconds);
+	return 0;
 }
 int sys_getdents(int fd,struct linux_dirent * dirp,unsigned long len)
 {
@@ -431,7 +428,7 @@ int sys_getdents(int fd,struct linux_dirent * dirp,unsigned long len)
 char* sys_getcwd(char * buf, size_t size)
 {
 	char path[256];
-	printk("getcwd work%s!\n",buf);
+	printk("getcwd work!%s\n",buf);
 	return buf;
 }
 
