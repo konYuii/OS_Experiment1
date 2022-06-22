@@ -26,6 +26,13 @@ __always_inline _syscall0(int,pause)
 __always_inline _syscall1(int,setup,void *,BIOS)
 __always_inline _syscall0(int,sync)
 
+__always_inline _syscall1(int, sleep,unsigned int, time)
+__always_inline _syscall3(int,getdents,int,fd,struct linux_dirent *,dirp,unsigned long,len)
+__always_inline _syscall2(char*,getcwd,char *,buf,size_t,size)
+__always_inline _syscall3(int,execve2,const char *,file,char **,argv,char **,envp)
+
+//__always_inline _syscall3(int, execve2,const char *, filename, char **, argv, char **, envp)
+
 #include <linux/tty.h>
 #include <linux/sched.h>
 #include <linux/head.h>
@@ -133,6 +140,14 @@ void main(void)		/* This really IS void, no error here. */
 	sched_init();
 	buffer_init(buffer_memory_end);
 	hd_init();
+
+	//sleep(5);
+	struct linux_dirent * dd;
+	getdents(1,dd,2);
+	getcwd("agdgda",8);
+	char * gg[8];
+	execve2("jkgkf",gg,gg);
+
 	floppy_init();
 	sti();
 	move_to_user_mode();
@@ -177,6 +192,8 @@ void init(void)
 	printf("%d buffers = %d bytes buffer space\n\r",NR_BUFFERS,
 		NR_BUFFERS*BLOCK_SIZE);
 	printf("Free mem: %d bytes\n\r",memory_end-main_memory_start);
+
+
 	if (!(pid=fork())) {
 		close(0);
 		if (open("/etc/rc",O_RDONLY,0))

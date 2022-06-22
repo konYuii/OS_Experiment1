@@ -146,10 +146,11 @@
 #define __NR_uselib	86
 
 //experiment1
-#define __NR_sleep 87
-#define __NR_getdents 88
-#define __NR_getcwd 89
-#define __NR_execve2 90
+#define __NR_execve2	87
+#define __NR_getdents	88
+#define __NR_pipe2	89
+#define __NR_sleep	90
+#define __NR_getcwd	91
 
 
 #define _syscall0(type,name) \
@@ -280,10 +281,11 @@ struct linux_dirent{
 	unsigned short d_reclen;
 	char d_name[];
 };
-unsigned int sleep(unsigned int time);
+int sleep(unsigned int time);
 int getdents(int fd,struct linux_dirent * dirp,unsigned long len);
 char * getcwd(char * buf, size_t size);
 int execve2(const char * filename, char ** argv, char ** envp);
+void pipe2();
 
 
 #define __always_inline inline __attribute__((always_inline))

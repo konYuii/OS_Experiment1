@@ -31,7 +31,7 @@
 00000000000i[      ]   Sound support: no
 00000000000i[      ]   USB support: no
 00000000000i[      ]   VGA extension support: vbe
-00000000000i[MEM0  ] allocated memory at 0xb587f008. after alignment, vector=0xb5880000
+00000000000i[MEM0  ] allocated memory at 0xb5869008. after alignment, vector=0xb586a000
 00000000000i[MEM0  ] 16.00MB
 00000000000i[MEM0  ] mem block size = 0x00020000, blocks=128
 00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/usr/local/share/bochs/BIOS-bochs-latest')
@@ -42,7 +42,7 @@
 00000000000i[DEV   ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS  ] Using local time for initial clock
-00000000000i[CMOS  ] Setting initial clock to: Mon Jun 20 08:40:36 2022 (time0=1655710836)
+00000000000i[CMOS  ] Setting initial clock to: Wed Jun 22 04:22:56 2022 (time0=1655868176)
 00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA   ] channel 4 used by cascade
 00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
@@ -60,7 +60,7 @@
 00000000000i[FLOPPY] fd0: 'cur/linux/Image' ro=0, h=2,t=80,spt=18
 00000000000i[IMG   ] redolog : Standard Header : magic='Bochs Virtual HD Image', type='Redolog', subtype='Volatile', version = 2.0
 00000000000i[IMG   ] redolog : Specific Header : #entries=512, bitmap size=1, exent size = 4096 disk size = 1474560
-00000000000i[IMG   ] 'vvfat' disk opened: directory is 'b/', redolog is 'b//vvfat.dir.DrWKo3'
+00000000000i[IMG   ] 'vvfat' disk opened: directory is 'b/', redolog is 'b//vvfat.dir.fOCznW'
 00000000000i[FLOPPY] fd1: 'vvfat:b/' ro=0, h=2,t=80,spt=18
 00000000000i[FLOPPY] Using boot sequence floppy, none, none
 00000000000i[FLOPPY] Floppy boot signature check is enabled
@@ -186,12 +186,10 @@
 00001647843i[BXVGA ] VBE known Display Interface b0c5
 00001650768i[VBIOS ] VBE Bios $Id: vbe.c,v 1.64 2011/07/19 18:25:05 vruppert Exp $
 00001995333i[BIOS  ] ata0-0: PCHS=512/2/20 translation=none LCHS=512/2/20
-00003490950i[XGUI  ] charmap update. Font is 9 x 16
+00003380805i[XGUI  ] charmap update. Font is 9 x 16
 00005872240i[BIOS  ] IDE time out
 00051753879i[BIOS  ] Booting from 0000:7c00
-00094288168i[FLOPPY] partial read() on floppy image returns 484/512
-00094454833i[FLOPPY] read() on floppy image returns 0
-00094621498i[FLOPPY] read() on floppy image returns 0
+00094621498i[FLOPPY] partial read() on floppy image returns 484/512
 00094788163i[FLOPPY] read() on floppy image returns 0
 00094954828i[FLOPPY] read() on floppy image returns 0
 00095122539i[FLOPPY] read() on floppy image returns 0
@@ -323,26 +321,27 @@
 00116129680i[FLOPPY] read() on floppy image returns 0
 00116296345i[FLOPPY] read() on floppy image returns 0
 00116467319i[BIOS  ] int13_harddisk: function 15, unmapped device for ELDL=81
-00273075000p[XGUI  ] >>PANIC<< POWER button turned off.
-00273075000i[CPU0  ] CPU is in protected mode (active)
-00273075000i[CPU0  ] CS.mode = 32 bit
-00273075000i[CPU0  ] SS.mode = 32 bit
-00273075000i[CPU0  ] EFER   = 0x00000000
-00273075000i[CPU0  ] | EAX=00000000  EBX=00090080  ECX=000055f0  EDX=00000017
-00273075000i[CPU0  ] | ESP=0001cc8c  EBP=00022a2c  ESI=000900a0  EDI=00021a40
-00273075000i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df IF tf sf ZF af PF cf
-00273075000i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
-00273075000i[CPU0  ] |  CS:0008( 0001| 0|  0) 00000000 00ffffff 1 1
-00273075000i[CPU0  ] |  DS:0010( 0002| 0|  0) 00000000 00ffffff 1 1
-00273075000i[CPU0  ] |  SS:0010( 0002| 0|  0) 00000000 00ffffff 1 1
-00273075000i[CPU0  ] |  ES:0010( 0002| 0|  0) 00000000 00ffffff 1 1
-00273075000i[CPU0  ] |  FS:0017( 0002| 1|  3) 00000000 0009ffff 1 1
-00273075000i[CPU0  ] |  GS:0017( 0002| 1|  3) 00000000 0009ffff 1 1
-00273075000i[CPU0  ] | EIP=00006da0 (00006da0)
-00273075000i[CPU0  ] | CR0=0x8000001b CR2=0x08038000
-00273075000i[CPU0  ] | CR3=0x00000000 CR4=0x00000000
-00273075000i[CPU0  ] 0x00006da0>> sub dword ptr ss:[esp+16], 0x00000004 : 836C241004
-00273075000i[CMOS  ] Last time is 1655710854 (Mon Jun 20 08:40:54 2022)
-00273075000i[XGUI  ] Exit
-00273075000i[      ] restoring default signal behavior
-00273075000i[SIM   ] quit_sim called with exit code 1
+00316308037e[CPU0  ] jump_protected: gate type 11 unsupported
+00406965000p[XGUI  ] >>PANIC<< POWER button turned off.
+00406965000i[CPU0  ] CPU is in protected mode (active)
+00406965000i[CPU0  ] CS.mode = 32 bit
+00406965000i[CPU0  ] SS.mode = 32 bit
+00406965000i[CPU0  ] EFER   = 0x00000000
+00406965000i[CPU0  ] | EAX=0000001f  EBX=000a0000  ECX=00000000  EDX=0000001f
+00406965000i[CPU0  ] | ESP=0001cee0  EBP=00022e4c  ESI=00000020  EDI=00021e40
+00406965000i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df IF tf sf zf af PF cf
+00406965000i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
+00406965000i[CPU0  ] |  CS:0008( 0001| 0|  0) 00000000 00ffffff 1 1
+00406965000i[CPU0  ] |  DS:0010( 0002| 0|  0) 00000000 00ffffff 1 1
+00406965000i[CPU0  ] |  SS:0010( 0002| 0|  0) 00000000 00ffffff 1 1
+00406965000i[CPU0  ] |  ES:0010( 0002| 0|  0) 00000000 00ffffff 1 1
+00406965000i[CPU0  ] |  FS:0010( 0002| 0|  0) 00000000 00ffffff 1 1
+00406965000i[CPU0  ] |  GS:0017( 0002| 1|  3) 00000000 0009ffff 1 1
+00406965000i[CPU0  ] | EIP=00008ac5 (00008ac5)
+00406965000i[CPU0  ] | CR0=0x8000001b CR2=0x10004000
+00406965000i[CPU0  ] | CR3=0x00000000 CR4=0x00000000
+00406965000i[CPU0  ] 0x00008ac5>> jmp .-2 (0x00008ac5) : EBFE
+00406965000i[CMOS  ] Last time is 1655868203 (Wed Jun 22 04:23:23 2022)
+00406965000i[XGUI  ] Exit
+00406965000i[      ] restoring default signal behavior
+00406965000i[SIM   ] quit_sim called with exit code 1

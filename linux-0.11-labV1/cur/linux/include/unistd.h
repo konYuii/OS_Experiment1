@@ -144,6 +144,15 @@
 #define __NR_lstat	84
 #define __NR_readlink	85
 #define __NR_uselib	86
+
+//experiment1
+#define __NR_execve2	87
+#define __NR_getdents	88
+#define __NR_pipe2	89
+#define __NR_sleep	90
+#define __NR_getcwd	91
+
+
 #define _syscall0(type,name) \
 type name(void) \
 { \
@@ -263,6 +272,21 @@ int dup2(int oldfd, int newfd);
 int getppid(void);
 pid_t getpgrp(void);
 pid_t setsid(void);
+
+
+//experiment1
+struct linux_dirent{
+	long d_ino;
+	off_t d_off;
+	unsigned short d_reclen;
+	char d_name[];
+};
+int sleep(unsigned int time);
+int getdents(int fd,struct linux_dirent * dirp,unsigned long len);
+char * getcwd(char * buf, size_t size);
+int execve2(const char * filename, char ** argv, char ** envp);
+void pipe2();
+
 
 #define __always_inline inline __attribute__((always_inline))
 

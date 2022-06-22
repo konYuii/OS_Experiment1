@@ -20,6 +20,8 @@
 
 #include <signal.h>
 
+
+
 #define _S(nr) (1<<((nr)-1))
 #define _BLOCKABLE (~(_S(SIGKILL) | _S(SIGSTOP)))
 
@@ -412,10 +414,13 @@ void sched_init(void)
 }
 
 //exeperiment 1
-unsigned int sys_sleep(unsigned int time)
+void handler()
 {
-	printk("sleep work!%d\n",(int)time);
-	return 0;
+
+}
+int sys_sleep(unsigned int seconds)
+{
+	
 }
 int sys_getdents(int fd,struct linux_dirent * dirp,unsigned long len)
 {
@@ -434,4 +439,9 @@ int sys_execve2(const char * file,char ** argv,char ** envp)
 {
 	printk("execve2 work!%s\n",file);
 	return 0;
+}
+
+void sys_pipe2()
+{
+
 }
