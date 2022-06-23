@@ -19,7 +19,7 @@
 #include <asm/segment.h>
 
 #include <signal.h>
-
+#include <unistd.h>
 
 
 #define _S(nr) (1<<((nr)-1))
@@ -414,32 +414,27 @@ void sched_init(void)
 }
 
 //exeperiment 1
-void handler()
-{
-
-}
 int sys_sleep(unsigned int seconds)
 {
-	
-}
-int sys_getdents(int fd,struct linux_dirent * dirp,unsigned long len)
-{
-	printk("getdents work!%d\n",fd);
+	sys_signal(SIGALRM, SIG_IGN, NULL);
+	sys_alarm(seconds);
+	sys_pause();
 	return 0;
 }
+int sys_getdents(unsigned int fd, struct linux_dirent *dirent, unsigned int len)
+{
+	return 0;
+}
+
 
 char* sys_getcwd(char * buf, size_t size)
 {
 	char path[256];
-	printk("getcwd work%s!\n",buf);
+	printk("getcwd work!%s\n",buf);
 	return buf;
 }
 
-int sys_execve2(const char * file,char ** argv,char ** envp)
-{
-	printk("execve2 work!%s\n",file);
-	return 0;
-}
+
 
 void sys_pipe2()
 {

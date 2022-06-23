@@ -93,7 +93,7 @@ extern int sys_uselib();
 //exeperiment1
 struct linux_dirent;
 extern int sys_sleep(unsigned int time);
-extern int sys_getdents(int fd,struct linux_dirent * dirp,unsigned long len);
+extern int sys_getdents(unsigned int fd,struct linux_dirent *dirp,unsigned int len);
 extern char * sys_getcwd(char * buf,size_t size);
 extern int sys_execve2(const char * file,char ** argv,char ** envp);
 extern void sys_pipe2();
