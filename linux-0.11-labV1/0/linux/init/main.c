@@ -26,9 +26,7 @@ __always_inline _syscall0(int,pause)
 __always_inline _syscall1(int,setup,void *,BIOS)
 __always_inline _syscall0(int,sync)
 
-__always_inline _syscall2(char*,getcwd,char *,buf,size_t,size)
 
-//__always_inline _syscall3(int, execve2,const char *, filename, char **, argv, char **, envp)
 
 #include <linux/tty.h>
 #include <linux/sched.h>
@@ -138,10 +136,7 @@ void main(void)		/* This really IS void, no error here. */
 	buffer_init(buffer_memory_end);
 	hd_init();
 
-	//sleep(5);
-	//struct linux_dirent * dd;
-	//getdents(1,dd,2);
-	getcwd("agdgda",8);
+
 
 
 	floppy_init();

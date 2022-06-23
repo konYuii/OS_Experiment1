@@ -19,11 +19,19 @@
 #include <asm/segment.h>
 
 #include <signal.h>
-#include <unistd.h>
 
 
 #define _S(nr) (1<<((nr)-1))
 #define _BLOCKABLE (~(_S(SIGKILL) | _S(SIGSTOP)))
+
+
+struct linux_dirent
+{
+	long d_ino;
+	off_t d_off;
+	unsigned short d_reclen;
+	char d_name[14];
+};
 
 void show_task(int nr,struct task_struct * p)
 {
@@ -423,7 +431,40 @@ int sys_sleep(unsigned int seconds)
 }
 int sys_getdents(unsigned int fd, struct linux_dirent *dirent, unsigned int len)
 {
-	return 0;
+	struct m_inode *myNode;
+	myNode = current->filp[fd]->f_inode;
+	struct buffer_head *myBlock;
+	myBlock = bread(myNode->i_dev,myNode->i_zone[0]);
+
+	struct dir_entry *myDir;
+	myDir = (struct dir_entry *)(myBlock->b_data);
+
+	int total = 0;
+	struct linux_dirent myDirent;
+	while(total+24<1024)
+	{
+		if(myDir->inode==0 || total + 24 > len)
+		{
+			return total;
+		}
+		if(myDir->inode)
+		{
+			myDirent.d_ino = myDir->inode;
+			int i;
+			for(i=0;i<NAME_LEN;i++)
+				myDirent.d_name[i] = myDir->name[i];
+			myDirent.d_off = total;
+			myDirent.d_reclen = 24;
+
+			//printk("%s\t",myDirent.d_name);
+			char *buf = &myDirent;
+			for(i=0;i<24;i++)
+				put_fs_byte(*(buf + i),(char *)dirent + i + total);
+		}
+		total+=24;
+		myDir++;
+	}
+	return total;
 }
 
 

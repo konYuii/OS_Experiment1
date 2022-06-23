@@ -275,17 +275,17 @@ pid_t setsid(void);
 
 
 //experiment1
-struct linux_dirent{
-	long d_ino;
-	off_t d_off;
-	unsigned short d_reclen;
-	char* d_name;
-};
-int sleep(unsigned int time);
-int getdents(unsigned int fd,struct linux_dirent *dirp,unsigned int len);
-char * getcwd(char * buf, size_t size);
-int execve2(const char * filename, char ** argv, char ** envp);
-void pipe2();
+// struct linux_dirent{
+// 	long d_ino;
+// 	off_t d_off;
+// 	unsigned short d_reclen;
+// 	char* d_name;
+// };
+// int sleep(unsigned int time);
+// int getdents(unsigned int fd,struct linux_dirent *dirp,unsigned int len);
+// char * getcwd(char * buf, size_t size);
+// int execve2(const char * filename, char ** argv, char ** envp);
+// void pipe2();
 
 
 #define __always_inline inline __attribute__((always_inline))
