@@ -470,8 +470,66 @@ int sys_getdents(unsigned int fd, struct linux_dirent *dirent, unsigned int len)
 
 char* sys_getcwd(char * buf, size_t size)
 {
-	char path[256];
-	printk("getcwd work!%s\n",buf);
+	struct m_inode *myNode = current->pwd;
+
+	char path[10][14];
+	int total = 0;
+	while(1)
+	{
+
+		int i;
+		struct buffer_head *myBlock;
+		myBlock = bread(myNode->i_dev, myNode->i_zone[0]);
+		struct dir_entry *myDir;
+		myDir = (struct dir_entry *)(myBlock->b_data);
+		int myid = myDir->inode;
+		myDir++;
+		
+
+		struct m_inode *paNode;
+		paNode = iget(myNode->i_dev, myDir->inode);
+		if(paNode == myNode)
+			break;
+		struct buffer_head *paBlock;
+		paBlock = bread(paNode->i_dev, paNode->i_zone[0]);
+		struct dir_entry *paDir;
+		paDir = (struct dir_entry *)(paBlock->b_data);
+		for(i=0;i<20;i++)
+		{
+			if(paDir->inode == 0)
+				break;
+			if(paDir->inode == myid)
+			{
+				//printk("%s\n", paDir->name);
+				strcpy(path[total],paDir->name);
+				total++;
+				break;
+			}
+			
+
+			paDir++;
+		}
+
+		myNode = paNode;
+	}
+	int k;
+	int cnt=0;
+	for(k=total-1;k>=0;k--)
+	{
+		//printk("pathK: %s\n",path[k]);
+		int m;
+		for(m=0;m<strlen(path[k]);m++)
+		{
+			/* if(path[k][m]=='\0')
+				break; */
+			put_fs_byte(path[k][m],buf+cnt);
+			cnt++;
+		}
+		put_fs_byte('/',buf+cnt);
+		cnt++;
+		//printk("%d\n",cnt);
+	}
+	put_fs_byte('\0',buf+cnt);
 	return buf;
 }
 
